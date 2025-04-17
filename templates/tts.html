@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text to Speech</title>
+</head>
+<body>
+  <h1>Text to Speech</h1>
+  <input type="text" id="text" placeholder="Type something..." size="50">
+  <button onclick="speak()">Convert to Speech</button>
+
+  <br><br>
+  <audio id="audio" controls style="display: none;"></audio>
+
+  <script>
+    async function speak() {
+      const text = document.getElementById("text").value;
+      const response = await fetch("/speak", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ text: text })
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        const audio = document.getElementById("audio");
+        audio.src = result.audio_url + "?v=" + new Date().getTime(); // prevent cache
+        audio.style.display = "block";
+        audio.play();
+      } else {
+        alert("Error: " + result.error);
+      }
+    }
+  </script>
+</body>
+</html>

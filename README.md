@@ -19,9 +19,17 @@ pip3 install pyaudio
 
 
 
-the file server uses speechrecognition and requires internet access.
+the file speech-to-text uses speechrecognition and requires internet access.
 it uses flask and socketio for backend with a simple html frontend
 
 pip install flask flask-socketio speechrecognition
 
 run server and go to localhost:5000
+
+
+
+the file text-to-speech uses gtts and requires internet access. it uses flask and socketio with a html frontend.
+
+pip install gTTS 
+
+this can be run similar to speech-to-text
